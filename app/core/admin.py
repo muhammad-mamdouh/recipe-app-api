@@ -5,6 +5,7 @@ from . import models
 
 
 class UserAdmin(BaseUserAdmin):
+    add_form_template = 'core/add_user.html'
     ordering = ['id']
     list_display = ['email', 'name']
     fieldsets = (
@@ -16,5 +17,12 @@ class UserAdmin(BaseUserAdmin):
         ),
         (_('Important dates'), {'fields': ('last_login',)}),
     )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide', ),
+            'fields': ('email', 'password1', 'password2'),
+        }),
+    )
+
 
 admin.site.register(models.User, UserAdmin)
