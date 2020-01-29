@@ -30,6 +30,19 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+THIRD_PARTY_APPS = [
+    'rest_framework',
+]
+
+SECURITY_THIRD_PARTY_APPS = [
+    'rest_framework.authtoken',
+]
+
+MY_APPS = [
+    'core',
+    'users',
+]
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,10 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # My Apps
-    'core',
 ]
+
+INSTALLED_APPS += THIRD_PARTY_APPS
+INSTALLED_APPS += SECURITY_THIRD_PARTY_APPS
+INSTALLED_APPS += MY_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,7 +97,11 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME'),
         'USER': os.environ.get('DB_USER'),
         'PASSWORD': os.environ.get('DB_PASS')
-    }
+    },
+    'TEST': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME'  : os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
 }
 
 
