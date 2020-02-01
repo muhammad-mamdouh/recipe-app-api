@@ -41,6 +41,7 @@ SECURITY_THIRD_PARTY_APPS = [
 MY_APPS = [
     'core',
     'users',
+    'recipe',
 ]
 
 INSTALLED_APPS = [

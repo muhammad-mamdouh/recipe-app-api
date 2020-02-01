@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 my_apps_urlpatterns = [
-    path('api/users/', include('users.urls'))
+    path('api/users/', include('users.urls')),
+    path('api/recipe/', include('recipe.urls')),
 ]
 
 urlpatterns = [
