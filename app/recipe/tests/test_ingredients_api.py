@@ -58,3 +58,22 @@ class PrivateIngredientsAPITest(TestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 2)
+
+    def test_create_ingredient_successful(self):
+        """Test creating a new ingredient"""
+        ingredient_payload = {'name': 'Salt'}
+        response = self.client.post(INGREDIENTS_URL, ingredient_payload)
+        ingredient_exists = Ingredient.objects.filter(
+                user=self.user,
+                name=ingredient_payload['name']
+        ).exists()
+
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertTrue(ingredient_exists)
+
+    def test_create_ingredient_with_missing_name_field(self):
+        """Test that creating a new ingredient will fail if name field is empty"""
+        ingredient_payload = {'name': ''}
+        response = self.client.post(INGREDIENTS_URL, ingredient_payload)
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
