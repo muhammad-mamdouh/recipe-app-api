@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 THIRD_PARTY_APPS = [
     'rest_framework',
+    'coverage',
 ]
 
 SECURITY_THIRD_PARTY_APPS = [
